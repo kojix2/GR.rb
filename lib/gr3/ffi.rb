@@ -17,10 +17,28 @@ module GR3
 
     extend GRCommons::TryExtern
 
-    typealias('GR3_MC_DTYPE', 'unsigned short')
-
     # https://github.com/sciapp/gr/blob/master/lib/gr3/gr3.h
     # keep same order
+
+    typealias('GR3_MC_DTYPE', 'unsigned short')
+
+    Coord = struct [
+      'float x',
+      'float y',
+      'float z'
+    ]
+
+    Triangle = struct [
+      { 'vertices[3]' => Coord },
+      { 'normal[3]' => Coord }
+    ]
+
+    Volume2Pass = struct [
+      'double dmin',
+      'double dmax',
+      'gr3_volume_2pass_priv_t *priv'
+    ]
+
     try_extern 'int gr3_init(int *attrib_list)'
     try_extern 'void gr3_free(void *pointer)'
     try_extern 'void gr3_terminate(void)'
@@ -29,7 +47,7 @@ module GR3
     try_extern 'const char *gr3_geterrorstring(int error)'
     try_extern 'void gr3_setlogcallback(void (*gr3_log_func)(const char *log_message))'
     try_extern 'int gr3_clear(void)'
-    try_extern 'void gr3_usecurrentframebuffer()'
+    try_extern 'void gr3_usecurrentframebuffer(void)'
     try_extern 'void gr3_useframebuffer(unsigned int framebuffer)'
     try_extern 'int gr3_setquality(int quality)'
     try_extern 'int gr3_getimage(int width, int height, int use_alpha, char *pixels)'
@@ -154,7 +172,7 @@ module GR3
     try_extern 'int gr3_setlightsources(int num_lights, float *positions, float *colors)'
     try_extern 'void gr3_setlightparameters(float ambient, float diffuse, float specular, float specular_power)'
     try_extern 'void gr3_getlightparameters(float *ambient, float *diffuse, float *specular, float *specular_power)'
-    try_extern 'void gr3_setdefaultlightparameters()'
+    try_extern 'void gr3_setdefaultlightparameters(void)'
     try_extern 'int gr3_getalphamode(int *mode)'
     try_extern 'void gr3_setalphamode(int mode)'
     try_extern 'void gr3_setclipping(float xmin, float xmax, float ymin, float ymax, float zmin, float zmax)'

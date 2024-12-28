@@ -22,35 +22,47 @@ module GR
 
     Vertex = struct [
       'double x',
-      'double y',
+      'double y'
     ]
 
     # Three-dimensional coordinate
     Point3d = struct [
       'double x',
       'double y',
-      'double z',
+      'double z'
     ]
 
     # Data point for `gr_volume_nogrid`
     DataPoint3d = struct [
-      { pt: Point3d },  # Coordinates of data point
-      'double data',    # Intensity of data point
+      { pt: Point3d }, # Coordinates of data point
+      'double data' # Intensity of data point
     ]
 
     # Provides optional extra data for `gr_volume_interp_gauss`
     Guess = struct [
       'double sqrt_det', # Square root of determinant of covariance matrix
-      {gauss_sig_1: Point3d},
-      {gauss_sig_2: Point3d},
-      {gauss_sig_3: Point3d}, # \f$\Sigma^{-\frac{1}{2}}\f$ encoded as three column vectors
+      { gauss_sig_1: Point3d },
+      { gauss_sig_2: Point3d },
+      { gauss_sig_3: Point3d } # \f$\Sigma^{-\frac{1}{2}}\f$ encoded as three column vectors
     ]
 
     # Provides optional extra data for `gr_volume_interp_tri_linear`
     TriLinear = struct [
-      'double grid_x_re', # Reciproke of interpolation kernel extent in x-directionGrid resolution in x direction 
+      'double grid_x_re', # Reciproke of interpolation kernel extent in x-directionGrid resolution in x direction
       'double grid_y_re', # Reciproke of interpolation kernel extent in y-directionGrid resolution in y direction
-      'double grid_z_re', # Reciproke of interpolation kernel extent in z-directionGrid resolution in z direction
+      'double grid_z_re' # Reciproke of interpolation kernel extent in z-directionGrid resolution in z direction
+    ]
+
+    CpuBasedVolume2Pass = struct [
+      'double dmin',
+      'double dmax',
+      'cpubasedvolume_2pass_priv_t *priv'
+    ]
+
+    Hexbin2Pass = struct [
+      'int nc',
+      'int nntmax',
+      'hexbin_2pass_priv_t *priv'
     ]
 
     try_extern 'void gr_initgr(void)'
@@ -143,6 +155,10 @@ module GR
     try_extern 'void gr_axeslbl(double, double, double, double, int, int, double,' \
                ' void (*)(double, double, const char *, double),' \
                ' void (*)(double, double, const char *, double))'
+    try_extern 'void gr_axis(char, axis_t *)'
+    try_extern 'void gr_drawaxis(char, axis_t *)'
+    try_extern 'void gr_drawaxes(axis_t *, axis_t *, int)'
+    try_extern 'void gr_freeaxis(axis_t *)'
     try_extern 'void gr_grid(double, double, double, double, int, int)'
     try_extern 'void gr_grid3d(double, double, double, double, double, double, int, int, int)'
     try_extern 'void gr_verrorbars(int, double *, double *, double *, double *)'
@@ -151,6 +167,7 @@ module GR
     try_extern 'void gr_polymarker3d(int, double *, double *, double *)'
     try_extern 'void gr_axes3d(double, double, double, double, double, double, int, int, int, double)'
     try_extern 'void gr_titles3d(char *, char *, char *)'
+    try_extern 'void gr_settitles3d(char *, char *, char *)'
     try_extern 'void gr_surface(int, int, double *, double *, double *, int)'
     try_extern 'void gr_contour(int, int, int, double *, double *, double *, double *, int)'
     try_extern 'void gr_contourf(int, int, int, double *, double *, double *, double *, int)'
@@ -188,6 +205,7 @@ module GR
     try_extern 'int gr_importgraphics(char *)'
     try_extern 'void gr_setshadow(double, double, double)'
     try_extern 'void gr_settransparency(double)'
+    try_extern 'void gr_inqtransparency(double *)'
     try_extern 'void gr_setcoordxform(double[3][2])'
     try_extern 'void gr_begingraphics(char *)'
     try_extern 'void gr_endgraphics(void)'
@@ -196,8 +214,12 @@ module GR
     try_extern 'int gr_startlistener(void)'
     try_extern 'void gr_mathtex(double, double, char *)'
     try_extern 'void gr_inqmathtex(double, double, char *, double *, double *)'
+    try_extern 'void gr_mathtex3d(double, double, double, char *, int)'
+    try_extern 'void gr_inqmathtex3d(double, double, double, char *, int, double *, double *, double *, double *)'
     try_extern 'void gr_beginselection(int, int)'
     try_extern 'void gr_endselection(void)'
+    try_extern 'void gr_setbboxcallback(int, void (*)(int, double, double, double, double))'
+    try_extern 'void gr_cancelbboxcallback(void)'
     try_extern 'void gr_moveselection(double, double)'
     try_extern 'void gr_resizeselection(int, double, double)'
     try_extern 'void gr_inqbbox(double *, double *, double *, double *)'
@@ -207,8 +229,10 @@ module GR
     try_extern 'int gr_inqregenflags(void)'
     try_extern 'void gr_savestate(void)'
     try_extern 'void gr_restorestate(void)'
+    try_extern 'void gr_savecontext(int)'
     try_extern 'void gr_selectcontext(int)'
     try_extern 'void gr_destroycontext(int)'
+    try_extern 'void gr_unselectcontext(void)'
     try_extern 'int gr_uselinespec(char *)'
     try_extern 'void gr_delaunay(int, const double *, const double *, int *, int **)'
     try_extern 'void gr_reducepoints(int, const double *, const double *, int, double *, double *)'
@@ -216,7 +240,8 @@ module GR
     try_extern 'void gr_gradient(int, int, double *, double *, double *, double *, double *)'
     try_extern 'void gr_quiver(int, int, double *, double *, double *, double *, int)'
     try_extern 'void gr_interp2(int nx, int ny, const double *x, const double *y, const double *z,' \
-               ' int nxq, int nyq, const double *xq, const double *yq, double *zq, int method, double extrapval)'
+               ' int nxq, int nyq, const double *xq, const double *yq, double *zq,' \
+               ' interp2_method_t method, double extrapval)'
     try_extern 'const char *gr_version(void)'
     try_extern 'void gr_shade(int, double *, double *, int, int, double *, int, int, int *)'
     try_extern 'void gr_shadepoints(int, double *, double *, int, int, int)'
@@ -248,6 +273,7 @@ module GR
     try_extern 'void gr_setscalefactors3d(double, double, double)'
     try_extern 'void gr_inqscalefactors3d(double *, double *, double *)'
     try_extern 'void gr_setspace3d(double, double, double, double)'
+    try_extern 'void gr_inqspace3d(int *, double *, double *, double *, double *)'
     try_extern 'void gr_text3d(double, double, double, char *, int axis)'
     try_extern 'void gr_inqtext3d(double, double, double, char *, int axis, double *, double *)'
     try_extern 'void gr_settextencoding(int)'
@@ -263,10 +289,22 @@ module GR
     try_extern 'const cpubasedvolume_2pass_t *gr_cpubasedvolume_2pass(int, int, int, double *, int, double *, double *, double *, double *, const cpubasedvolume_2pass_t *)'
     try_extern 'void gr_inqvpsize(int *, int *, double *)'
     try_extern 'void gr_polygonmesh3d(int, const double *, const double *, const double *, int, const int *, const int *)'
+    # FIXME:
+    # typedef double (*kernel_f)(const data_point3d_t *, const void *, const point3d_t *, const point3d_t *);
+    # typedef double (*radius_f)(const data_point3d_t *, const void *);
+    typealias 'kernel_f', 'void*'
+    typealias 'radius_f', 'void*'
     try_extern 'void gr_volume_nogrid(unsigned long, const data_point3d_t *, const void *, int, kernel_f, double *, double *, double, radius_f)'
     try_extern 'void gr_volume_interp_tri_linear_init(double, double, double)'
     try_extern 'void gr_volume_interp_gauss_init(double, double *)'
     try_extern 'double gr_volume_interp_tri_linear(const data_point3d_t *, const void *, const point3d_t *, const point3d_t *)'
     try_extern 'double gr_volume_interp_gauss(const data_point3d_t *, const void *, const point3d_t *, const point3d_t *)'
+    try_extern 'void gr_setmathfont(int font)'
+    try_extern 'void gr_inqmathfont(int *font)'
+    try_extern 'void gr_setclipregion(int region)'
+    try_extern 'void gr_inqclipregion(int *region)'
+    try_extern 'void gr_settextoffset(double xoff, double yoff)'
+    try_extern 'char *gr_ftoa(char *string, double value, format_reference_t *reference)'
+    try_extern 'void gr_getformat(format_reference_t *result, double origin, double min, double max, double tick_width, int major)'
   end
 end

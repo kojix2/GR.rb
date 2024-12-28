@@ -3,6 +3,7 @@ name: CI
 on:
   - push
   - pull_request
+  - workflow_dispatch
 
 jobs:
   test:
@@ -10,15 +11,15 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        gr: ["0.70.0", "0.71.7", "system"]
+        gr: ["0.72.11", "0.73.10", "system"]
         os: ["ubuntu", "macos", "windows"]
-        ruby: ["2.7", "3.1", "3.2"]
+        ruby: ["3.2", "3.3", "3.4"]
         exclude:
-          - { os: windows, gr: "0.70.0" }
-          - { os: windows, gr: "0.71.7" }
+          - { os: windows, gr: "0.72.11" }
+          - { os: windows, gr: "0.73.10" }
     runs-on: ${{ matrix.os }}-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
@@ -32,8 +33,8 @@ jobs:
       - name: Get official GR binary (macos)
         if: ${{ matrix.gr != 'system' && matrix.os == 'macos' }}
         run: |
-          wget https://github.com/sciapp/gr/releases/download/v${{ matrix.gr }}/gr-${{ matrix.gr }}-Darwin-x86_64.tar.gz
-          tar -xvf gr-${{ matrix.gr }}-Darwin-x86_64.tar.gz
+          wget https://github.com/sciapp/gr/releases/download/v${{ matrix.gr }}/gr-${{ matrix.gr }}-Darwin-aarch64.tar.gz 
+          tar -xvf gr-${{ matrix.gr }}-Darwin-aarch64.tar.gz
       - name: Setup OBS binary (ubuntu)
         if: ${{ matrix.gr == 'system' && matrix.os == 'ubuntu' }}
         run: |
