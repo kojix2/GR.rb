@@ -6,7 +6,7 @@
 <title>
   File: README
   
-    &mdash; Documentation by YARD 0.9.37
+    &mdash; Documentation by YARD 0.9.38
   
 </title>
 
@@ -68,7 +68,7 @@
 
 <h2 id="label-Installation">Installation</h2>
 
-<p>First, <a href="#gr-installation">install GR</a>. Then install href="https://github.com/red-data-tools/gr-plot"></a> gem.</p>
+<p>First, <a href="#gr-installation">install GR</a>. Then install <a href="https://github.com/red-data-tools/gr-plot"><code>gr-plot</code></a> gem.</p>
 
 <pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_gem'>gem</span> <span class='id identifier rubyid_install'>install</span> <span class='id identifier rubyid_gr'>gr</span><span class='op'>-</span><span class='id identifier rubyid_plot'>plot</span>
 </code></pre>
@@ -90,10 +90,10 @@
 <span class='id identifier rubyid_y'>y</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='float'>0.3</span><span class='comma'>,</span> <span class='float'>0.5</span><span class='comma'>,</span> <span class='float'>0.4</span><span class='comma'>,</span> <span class='float'>0.2</span><span class='comma'>,</span> <span class='float'>0.6</span><span class='comma'>,</span> <span class='float'>0.7</span><span class='rbracket'>]</span>
 
 <span class='comment'># show the figure
-</span><span class='const'><span class='object_link'><a href="GR.html" title="GR (module)">GR</a></span></span><span class='period'>.</span><span class='id identifier rubyid_plot'>plot</span><span class='lparen'>(</span><span class='id identifier rubyid_x'>x</span><span class='comma'>,</span> <span class='id identifier rubyid_y'>y</span><span class='rparen'>)</span>
+</span><span class='const'><span class='object_link'><a href="GR.html" title="GR (module)">GR</a></span></span><span class='period'>.</span><span class='id identifier rubyid_plot'><span class='object_link'><a href="GR.html#plot-class_method" title="GR.plot (method)">plot</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_x'>x</span><span class='comma'>,</span> <span class='id identifier rubyid_y'>y</span><span class='rparen'>)</span>
 
 <span class='comment'># Save the figure in PNG format.
-</span><span class='const'><span class='object_link'><a href="GR.html" title="GR (module)">GR</a></span></span><span class='period'>.</span><span class='id identifier rubyid_savefig'>savefig</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>figure.png</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+</span><span class='const'><span class='object_link'><a href="GR.html" title="GR (module)">GR</a></span></span><span class='period'>.</span><span class='id identifier rubyid_savefig'><span class='object_link'><a href="GR.html#savefig-class_method" title="GR.savefig (method)">savefig</a></span></span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>figure.png</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
 </code></pre>
 
 <p>GR.rb supports <a href="../../wiki/Jupyter-Notebook">Jupyter Notebook / Lab</a>.</p>
@@ -103,12 +103,12 @@
 <h4 id="label-GR-3A-3APlot+-+A+simple-2C+matlab-style+API"><a href="https://github.com/red-data-tools/gr-plot">GR::Plot - A simple, matlab-style API</a></h4>
 
 <pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>gr/plot</span><span class='tstring_end'>&#39;</span></span>
-<span class='const'><span class='object_link'><a href="GR.html" title="GR (module)">GR</a></span></span><span class='period'>.</span><span class='id identifier rubyid_plot'>plot</span><span class='lparen'>(</span><span class='id identifier rubyid_x'>x</span><span class='comma'>,</span> <span class='id identifier rubyid_y'>y</span><span class='rparen'>)</span>
+<span class='const'><span class='object_link'><a href="GR.html" title="GR (module)">GR</a></span></span><span class='period'>.</span><span class='id identifier rubyid_plot'><span class='object_link'><a href="GR.html#plot-class_method" title="GR.plot (method)">plot</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_x'>x</span><span class='comma'>,</span> <span class='id identifier rubyid_y'>y</span><span class='rparen'>)</span>
 </code></pre>
 
 <p>List of available functions.</p>
 
-<p>href="../../wiki/Plotting-functions#plot"></a> href="../../wiki/Plotting-functions#step"></a> href="../../wiki/Plotting-functions#plot3"></a> href="../../wiki/Plotting-functions#polar"></a> href="../../wiki/Plotting-functions#scatter"></a> href="../../wiki/Plotting-functions#scatter3"></a> href="../../wiki/Plotting-functions#stem"></a> href="../../wiki/Plotting-functions#barplot"></a> href="../../wiki/Plotting-functions#histogram"></a> href="../../wiki/Plotting-functions#polarhistogram"></a> href="../../wiki/Plotting-functions#hexbin"></a> href="../../wiki/Plotting-functions#contour"></a> href="../../wiki/Plotting-functions#contourf"></a> href="../../wiki/Plotting-functions#tricont"></a> href="../../wiki/Plotting-functions#surface"></a> href="../../wiki/Plotting-functions#trisurf"></a> href="../../wiki/Plotting-functions#wireframe"></a> href="../../wiki/Plotting-functions#volume"></a> href="../../wiki/Plotting-functions#heatmap"></a> href="../../wiki/Plotting-functions#polarheatmap"></a> href="../../wiki/Plotting-functions#shade"></a> href="../../wiki/Plotting-functions#imshow"></a> href="../../wiki/Plotting-functions#isosurface"></a></p>
+<p><a href="../../wiki/Plotting-functions#plot"><code>plot</code></a> <a href="../../wiki/Plotting-functions#step"><code>step</code></a> <a href="../../wiki/Plotting-functions#plot3"><code>plot3</code></a> <a href="../../wiki/Plotting-functions#polar"><code>polar</code></a> <a href="../../wiki/Plotting-functions#scatter"><code>scatter</code></a> <a href="../../wiki/Plotting-functions#scatter3"><code>scatter3</code></a> <a href="../../wiki/Plotting-functions#stem"><code>stem</code></a> <a href="../../wiki/Plotting-functions#barplot"><code>barplot</code></a> <a href="../../wiki/Plotting-functions#histogram"><code>histogram</code></a> <a href="../../wiki/Plotting-functions#polarhistogram"><code>polarhistogram</code></a> <a href="../../wiki/Plotting-functions#hexbin"><code>hexbin</code></a> <a href="../../wiki/Plotting-functions#contour"><code>contour</code></a> <a href="../../wiki/Plotting-functions#contourf"><code>contourf</code></a> <a href="../../wiki/Plotting-functions#tricont"><code>tricont</code></a> <a href="../../wiki/Plotting-functions#surface"><code>surface</code></a> <a href="../../wiki/Plotting-functions#trisurf"><code>trisurf</code></a> <a href="../../wiki/Plotting-functions#wireframe"><code>wireframe</code></a> <a href="../../wiki/Plotting-functions#volume"><code>volume</code></a> <a href="../../wiki/Plotting-functions#heatmap"><code>heatmap</code></a> <a href="../../wiki/Plotting-functions#polarheatmap"><code>polarheatmap</code></a> <a href="../../wiki/Plotting-functions#shade"><code>shade</code></a> <a href="../../wiki/Plotting-functions#imshow"><code>imshow</code></a> <a href="../../wiki/Plotting-functions#isosurface"><code>isosurface</code></a></p>
 
 <p>See <a href="https://github.com/red-data-tools/GR.rb/wiki">GR.rb Wiki</a> for details. Some GR module methods are overwritten. Code has been moved to <a href="https://github.com/red-data-tools/gr-plot">gr-plot</a>.</p>
 
@@ -218,9 +218,9 @@ If so, please feel free to contact us.
 </div></div>
 
       <div id="footer">
-  Generated on Mon Aug 11 10:12:13 2025 by
+  Generated on Sun Mar 22 01:24:57 2026 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.37 (ruby-3.4.5).
+  0.9.38 (ruby-4.0.2).
 </div>
 
     </div>
